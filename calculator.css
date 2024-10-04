@@ -1,0 +1,66 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    background-image: url('images/background.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container {
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #e4c472;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #333;
+}
+
+input, select, button {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background-color: #e4c472;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #614e1c;
+    
+}
+
+#result-container {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #e4c472c9;
+    border-radius: 10px;
+}
+
+#result-container p {
+    margin: 5px 0;
+}
+
+#custom-tip-container {
+    margin: 10px 0;
+}
