@@ -8,33 +8,50 @@
 </head>
 <body>
     <div class="container">
-        <h1>Calculator de Bacșiș</h1>
+        <div class="form-section">
+            <h1>Calculator de Bacșiș</h1>
 
-        <label for="bill-amount">Valoarea notei de plată:</label>
-        <input type="number" id="bill-amount" placeholder="Introdu suma">
+            <label for="bill-amount">Valoarea notei de plată:</label>
+            <input type="number" id="bill-amount" placeholder="Introdu suma">
 
-        <label for="tip-options">Alege bacșișul:</label>
-        <select id="tip-options">
-            <option value="0">Nu las bacșiș</option>
-            <option value="5">5%</option>
-            <option value="10">10%</option>
-            <option value="15">15%</option>
-            <option value="custom">Custom</option>
-        </select>
-        
-        <div id="custom-tip-container" style="display: none;">
-            <label for="custom-tip">Procentaj personalizat:</label>
-            <input type="number" id="custom-tip" placeholder="Introduceți procentajul" min="0" step="0.1">
+            <label for="tip-options">Alege bacșișul:</label>
+            <select id="tip-options">
+                <option value="0">Nu las bacșiș</option>
+                <option value="5">5%</option>
+                <option value="10">10%</option>
+                <option value="15">15%</option>
+                <option value="custom">Custom</option>
+            </select>
+            
+            <div id="custom-tip-container" style="display: none;">
+                <label for="custom-tip">Procentaj personalizat:</label>
+                <input type="number" id="custom-tip" placeholder="Introduceți procentajul" min="0" step="0.1">
+            </div>
+
+            <button id="calculate-btn">Calculează</button>
+            <button id="reset-btn">Reset</button>
+
+            <div id="result-container" style="display: none;">
+                <h2>Rezultate</h2>
+                <p>Suma inițială: <span id="initial-amount"></span></p>
+                <p>Valoarea bacșișului: <span id="tip-amount"></span></p>
+                <p>Total: <span id="total-amount"></span></p>
+            </div>
         </div>
 
-        <button id="calculate-btn">Calculează</button>
-        <button id="reset-btn">Reset</button>
+        <div class="form-section">
+            <h2>Alege cine plătește nota</h2>
 
-        <div id="result-container" style="display: none;">
-            <h2>Rezultate</h2>
-            <p>Suma inițială: <span id="initial-amount"></span></p>
-            <p>Valoarea bacșișului: <span id="tip-amount"></span></p>
-            <p>Total: <span id="total-amount"></span></p>
+            <label for="participant-name">Introduceti numele participantului:</label>
+            <input type="text" id="participant-name" placeholder="Numele participantului">
+            <button id="add-participant-btn">Adaugă participant</button>
+
+            <h3>Participanți:</h3>
+            <ul id="participant-list"></ul>
+
+            <button id="select-winner-btn">Alege un câștigător</button>
+
+            <h3 id="winner-display" style="display: none;">Câștigător: <span id="winner-name"></span></h3>
         </div>
     </div>
 
@@ -94,6 +111,47 @@
             customTipContainer.style.display = 'none';
             customTipInput.value = '';
             resultContainer.style.display = 'none';
+        });
+
+
+        const participantNameInput = document.getElementById('participant-name');
+        const addParticipantBtn = document.getElementById('add-participant-btn');
+        const participantList = document.getElementById('participant-list');
+        const selectWinnerBtn = document.getElementById('select-winner-btn');
+        const winnerDisplay = document.getElementById('winner-display');
+        const winnerNameSpan = document.getElementById('winner-name');
+
+        const participants = []; 
+
+        addParticipantBtn.addEventListener('click', () => {
+            const name = participantNameInput.value.trim();
+            if (name === "") {
+                alert('Introduceți un nume valid.');
+                return;
+            }
+            participants.push(name);
+            updateParticipantList();
+            participantNameInput.value = '';
+        });
+
+        function updateParticipantList() {
+            participantList.innerHTML = ""; 
+            participants.forEach((participant) => {
+                const li = document.createElement('li');
+                li.textContent = participant;
+                participantList.appendChild(li);
+            });
+        }
+
+        selectWinnerBtn.addEventListener('click', () => {
+            if (participants.length < 2) {
+                alert('Trebuie să adăugați cel puțin 2 participanți.');
+                return;
+            }
+            const randomIndex = Math.floor(Math.random() * participants.length);
+            const winner = participants[randomIndex];
+            winnerNameSpan.textContent = winner;
+            winnerDisplay.style.display = 'block';
         });
     </script>
 </body>
